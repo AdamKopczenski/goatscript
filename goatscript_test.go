@@ -2,22 +2,24 @@ package goatscript
 
 import (
 	"fmt"
-	goatdata "goatscript/ast"
+	// This path works for me but cannot possibly work for anyone else. Hmm.
+	goatdata "github.com/AdamKopczenski/goatscript/ast"
 )
 
 // https://blog.golang.org/examples
 
 func Example() {
-	script := goatdata.Condition{
-		Test: goatdata.IntLessThan{
-				A: goatdata.IntVariable{ "var1" },
-				B: goatdata.Int{ 2 },
+	script := goatdata.IfStmt{
+		Condition: goatdata.BinaryExpr{
+				Lhs: goatdata.IntVariable{ "var1" },
+				Op: goatdata.Token{ "<" },
+				Rhs: goatdata.Int{ 2 },
 			},
-		True: goatdata.IntIncrement{
+		Then: goatdata.IntIncrement{
 				Variable: "var1",
 				Amount: 1,
 			},
-		False: goatdata.NoOp{},
+		Else: goatdata.NoOp{},
 	}
 
 	templ, err := Precompile(script)
