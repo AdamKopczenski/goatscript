@@ -4,6 +4,9 @@ import (
 	"fmt"
 	// This path works for me but cannot possibly work for anyone else. Hmm.
 	ast "github.com/AdamKopczenski/goatscript/ast"
+	template "github.com/AdamKopczenski/goatscript/template"
+	// "Imported and not used" feels like a wrong description of this. Hmm.
+	//instance "github.com/AdamKopczenski/goatscript/instance"
 )
 
 // https://blog.golang.org/examples
@@ -25,7 +28,7 @@ func Example() {
 		Else: []ast.Stmt{ ast.NoOpStmt{} },
 	}
 
-	templ, err := Precompile(script)
+	templ, err := template.Precompile(script)
 	if err != nil {
 		panic(err)
 	}
