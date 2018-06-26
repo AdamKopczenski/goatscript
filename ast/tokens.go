@@ -3,7 +3,7 @@ package ast
 type Token int
 
 const (
-	Unknown = iota
+	Unknown Token = iota
 	LessThan
 	EqualTo
 	GreaterThan

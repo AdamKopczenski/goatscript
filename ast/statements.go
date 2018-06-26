@@ -10,4 +10,9 @@ type IfStmt struct {
 	Else       []Stmt
 }
 
-// stub
+type IncrementStmt struct {
+	Operand Variable
+}
+
+type NoOpStmt struct {
+}

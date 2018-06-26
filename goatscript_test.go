@@ -3,23 +3,26 @@ package goatscript
 import (
 	"fmt"
 	// This path works for me but cannot possibly work for anyone else. Hmm.
-	goatdata "github.com/AdamKopczenski/goatscript/ast"
+	ast "github.com/AdamKopczenski/goatscript/ast"
 )
 
 // https://blog.golang.org/examples
 
 func Example() {
-	script := goatdata.IfStmt{
-		Condition: goatdata.BinaryExpr{
-				Lhs: goatdata.IntVariable{ "var1" },
-				Op: goatdata.Token{ "<" },
-				Rhs: goatdata.Int{ 2 },
+	// if var1 < 2 {
+	// 	++var1;
+	// } else {
+	// }
+	script := ast.IfStmt{
+		Condition: ast.BinaryExpr{
+				Lhs: ast.IntVariable{ ast.Variable{"var1"} },
+				Op: ast.Token(ast.LessThan),
+				Rhs: ast.IntLiteral{2},
 			},
-		Then: goatdata.IntIncrement{
-				Variable: "var1",
-				Amount: 1,
-			},
-		Else: goatdata.NoOp{},
+		Then: []ast.Stmt{ ast.IncrementStmt{
+				Operand: ast.Variable{"var1"} ,
+			} },
+		Else: []ast.Stmt{ ast.NoOpStmt{} },
 	}
 
 	templ, err := Precompile(script)
